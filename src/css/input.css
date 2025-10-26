@@ -1,18 +1,73 @@
 @import "tailwindcss";
 
+@layer base {
+    :root {
+        --color-text: #f2f4f5;
+        --color-background: #01050a;
+        --color-primary: #19376d;
+        --color-secondary: #0b2447;
+        --color-accent: #576cbc;
+    }
+}
+
 @layer utilities {
     @keyframes fadeIn {
         from {
             opacity: 0;
             transform: translatey(10px);
         }
+
         to {
             opacity: 1;
             transform: translatey(0);
         }
     }
 
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
     .animate-fade-in {
         animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    .animate-slide-in-left {
+        animation: slideInLeft 1s ease-in-out forwards;
+    }
+
+    .text-text {
+        color: var(--color-text);
+    }
+
+    .bg-background {
+        background-color: var(--color-background);
+    }
+
+    .bg-primary {
+        background-color: var(--color-primary);
+    }
+
+    .text-primary {
+        color: var(--color-primary);
+    }
+
+    .bg-secondary {
+        background-color: var(--color-secondary);
+    }
+
+    .bg-accent {
+        background-color: var(--color-accent);
+    }
+
+    .hover\:bg-secondary:hover {
+        background-color: var(--color-secondary);
     }
 }
