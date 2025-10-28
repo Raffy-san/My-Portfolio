@@ -63,11 +63,23 @@
         background-color: var(--color-secondary);
     }
 
+    .text-secondary {
+        color: var(--color-secondary);
+    }
+
+    .text-accent {
+        color: var(--color-accent);
+    }
+
     .bg-accent {
         background-color: var(--color-accent);
     }
 
     .hover\:bg-secondary:hover {
         background-color: var(--color-secondary);
+    }
+
+    .hover\:text-accent:hover {
+        color: var(--color-accent);
     }
 }
