@@ -10,11 +10,54 @@
 
 <body class="bg-linear-to-r from-black to-slate-950 text-text min-h-screen w-full">
     <div data-include="../src/components/header.html"></div>
-    <main> 
-        <section>
-            
+
+    <main>
+        <section class="p-6 min-h-screen">
+            <div class="mb-10 animate-slide-in-left">
+                <h1 class="text-text text-center text-3xl md:text-4xl font-bold tracking-wide">My Projects</h1>
+                <p class="text-center text-gray-400 mt-2">A showcase of the websites and systems I've built.</p>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 animate-fade-in">
+
+                <!-- Project Card -->
+                <div class="bg-white/5 rounded-xl p-4 shadow-xl hover:scale-105 transition duration-300">
+                    <img src="../src/img/img1.webp" class="w-full h-48 object-cover rounded-lg" alt="">
+                    <h2 class="mt-4 font-semibold text-lg text-accent">Fitness Landing Page</h2>
+                    <p class="text-sm text-gray-300 mt-1">A fitness website built with Tailwind CSS.</p>
+                    <a href="https://fitlifefitness.vercel.app/" target="_blank"
+                        class="mt-3 inline-block text-sm border border-accent text-accent px-4 py-2 rounded hover:bg-accent hover:text-white transition">
+                        Visit Site →
+                    </a>
+                </div>
+
+                <!-- Project Card -->
+                <div class="bg-white/5 rounded-xl p-4 shadow-xl hover:scale-105 transition duration-300">
+                    <img src="../src/img/img2.webp" class="w-full h-48 object-cover rounded-lg" alt="">
+                    <h2 class="mt-4 font-semibold text-lg text-accent">TCM e-Business Management System</h2>
+                    <p class="text-sm text-gray-300 mt-1">PHP + MySQL system for the schools business center.</p>
+                    <button
+                        class="mt-3 inline-block text-sm border border-accent text-accent px-4 py-2 rounded opacity-60 cursor-not-allowed">
+                        Local Project
+                    </button>
+                </div>
+
+                <!-- Project Card -->
+                <div class="bg-white/5 rounded-xl p-4 shadow-xl hover:scale-105 transition duration-300">
+                    <img src="../src/img/img3.webp" class="w-full h-48 object-cover rounded-lg" alt="">
+                    <h2 class="mt-4 font-semibold text-lg text-accent">Procurement System</h2>
+                    <p class="text-sm text-gray-300 mt-1">System for requesting and approving supplies and purchases.
+                    </p>
+                    <button
+                        class="mt-3 inline-block text-sm border border-accent text-accent px-4 py-2 rounded opacity-60 cursor-not-allowed">
+                        Local Project
+                    </button>
+                </div>
+            </div>
         </section>
     </main>
+
     <script src="../src/js/include.js" defer></script>
 </body>
 
