@@ -12,17 +12,17 @@
     <div data-include="../src/components/header.html"></div>
 
     <main>
-        <section class="grid grid-cols-3 p-8 h-screen gap-4">
+        <section class="grid grid-cols-1 md:grid-cols-3 p-8 min-h-screen gap-4">
             <div class="col-span-1 flex justify-center items-center animate-slide-in-left">
-                <img src="../src/img/pic.webp" alt="My Face" class="w-70 h-auto rounded-2xl shadow-lg object-cover">
+                <img src="../src/img/pic.webp" alt="My Face" class="w-60 md:w-72 h-auto rounded-2xl shadow-lg object-cover">
             </div>
-            <div class="col-span-2 flex flex-col justify-center w-full max-w-3xl mx-auto space-y-4">
-                <div class="flex justify-start w-full animate-fade-in">
-                    <h1 class="text-4xl font-bold border-b-2 border-white mb-6 pb-2 tracking-wide text-accent">ABOUT ME
+            <div class="md:col-span-2 flex flex-col justify-center w-full max-w-3xl mx-auto space-y-6 text-center md:text-left animate-fade-in">
+                <div class="flex justify-center md:justify-start w-full animate-fade-in">
+                    <h1 class="text-3xl md:text-4xl font-bold border-b-2 border-white mb-6 pb-2 tracking-wide text-accent">ABOUT ME
                     </h1>
                 </div>
                 <div class="flex justify-center text-md">
-                    <p class="text-lg leading-relaxed text-text">Hello, I’m Rafael F. Sanoria, a graduate of The
+                    <p class="text-base md:text-lg leading-relaxed text-text">Hello, I’m Rafael F. Sanoria, a graduate of The
                         College of Maasin with a degree in Bachelor of
                         Science in Information Technology.
                         I’m passionate about web development and enjoy creating tech solutions that make everyday
@@ -30,7 +30,7 @@
                         simpler and more efficient.</p>
                 </div>
                 <div>
-                    <p class="text-lg leading-relaxed text-text">
+                    <p class="text-base md:text-lg leading-relaxed text-text">
                         One of my projects is a <span class="font-semibold text-accent">Business Center Management
                             System</span> for The College of Maasin, designed to
                         digitalize and simplify the manual operations of the school’s business center.
