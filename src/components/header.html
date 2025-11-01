@@ -1,22 +1,72 @@
-<header class="fixed top-0 left-0 right-0 grid grid-cols-3 items-center p-4 text-text">
-    <!-- Left: Logo or site title -->
-    <div class="flex justify-center">
-        <h1 class="text-xl font-bold bg-linear-to-r from-blue-900  to-blue-800 bg-clip-text text-transparent">My Portfolio</h1>
-    </div>
+<header class="bg-white dark:bg-gray-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+            <div class="md:flex md:items-center md:gap-12">
+                <a class="block text-teal-600 dark:text-teal-600" href="index.html">
+                    <span class="sr-only">Home</span>
+                    <span
+                        class="font-semibold bg-linear-to-tl from-blue-900 to-blue-700 bg-clip-text text-transparent">My
+                        Portfolio</span>
+                </a>
+            </div>
 
-    <!-- Center: Navigation -->
-    <nav>
-        <ul class="flex justify-center gap-6 text-sm md:text-base">
-            <li><a href="index.html" class="hover:text-gray-300 transition-colors">Home</a></li>
-            <li><a href="about_me.html" class="hover:text-gray-300 transition-colors">About Me</a></li>
-            <li><a href="projects.html" class="hover:text-gray-300 transition-colors">Projects</a></li>
-        </ul>
-    </nav>
+            <div class="hidden md:block">
+                <nav aria-label="Global">
+                    <ul class="flex items-center gap-6 text-sm">
+                        <li>
+                            <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
+                                href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
+                                href="about_me.html">
+                                About Me
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
+                                href="projects.html">
+                                My Projects
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-    <!-- Right: Contact button -->
-    <div class="flex justify-center">
-        <a href="contact_me.html" class="bg-primary text-text px-4 py-2 rounded-lg hover:bg-secondary transition">
-            Contact Me
-        </a>
+            <div id="mobileMenu"
+                class="fixed top-0 left-0 h-full w-64 bg-background shadow-lg transform -translate-x-full transition-transform duration-300 md:hidden z-50">
+                <nav class="p-6">
+                    <ul class="flex flex-col gap-4 text-lg">
+                        <li><a class="text-white hover:text-accent" href="index.html">Home</a></li>
+                        <li><a class="text-white hover:text-accent" href="about_me.html">About Me</a></li>
+                        <li><a class="text-white hover:text-accent" href="projects.html">My Projects</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="overlay" class="hidden fixed inset-0 bg-shadow bg-opacity-50 z-40 md:hidden"></div>
+
+
+            <div class="flex items-center gap-4">
+                <div class="sm:flex sm:gap-4">
+                    <a class="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-secondary"
+                        href="contact_me.html">
+                        Contact Me
+                    </a>
+                </div>
+
+                <div class="block md:hidden">
+                    <button id="menuBtn"
+                        class="rounded-sm cursor-pointer bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
