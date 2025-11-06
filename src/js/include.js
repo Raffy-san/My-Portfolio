@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const basePath = window.location.hostname.includes("github.io")
+    ? "/My-Portfolio"
+    : "";
+
     const includeElements = document.querySelectorAll('[data-include]');
     includeElements.forEach(function (element) {
         const file = element.getAttribute('data-include');
-        fetch(file)
+
+        fetch(`${basePath}/${file}`)
             .then(response => response.text())
             .then(data => {
                 element.innerHTML = data;
