@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
-    const rootPath = isLocal ? "" : "/My-Portfolio/public";
+    const rootPath = isLocal ? "" : "/My-Portfolio";
 
     document.querySelectorAll('a').forEach(a => {
         const href = a.getAttribute("href");
