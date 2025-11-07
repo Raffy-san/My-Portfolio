@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
-    const basePath = isLocal ? "/public" : "/My-Portfolio/public";
+    const basePath = isLocal ? "" : "/My-Portfolio";
 
     // Fix all <a href="public/..."> links to include basePath
     document.querySelectorAll("a").forEach(a => {
