@@ -1,34 +1,46 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const basePath = window.location.hostname.includes("github.io")
-    ? "/My-Portfolio"
-    : "";
+    const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
 
-    const includeElements = document.querySelectorAll('[data-include]');
-    includeElements.forEach(function (element) {
+    const rootPath = isLocal ? "" : "/My-Portfolio";
+
+    document.querySelectorAll('a').forEach(a => {
+        const href = a.getAttribute("href");
+        if (href?.startsWith("public/")) {
+            a.setAttribute("href", rootPath + "/" + href);
+        }
+    });
+
+    document.querySelectorAll('[data-include]').forEach(async element => {
         const file = element.getAttribute('data-include');
+        const url = rootPath + "/" + file.replace(/^\/+/, "");
 
-        fetch(`${basePath}/${file}`)
-            .then(response => response.text())
-            .then(data => {
-                element.innerHTML = data;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Failed to fetch " + url);
+            const data = await response.text();
+            element.innerHTML = data;
 
-                const menuBtn = document.getElementById('menuBtn');
-                const mobileMenu = document.getElementById('mobileMenu');
-                const overlay = document.getElementById('overlay');
+            // Reattach menu event listeners inside header
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
 
+            if (menuBtn && mobileMenu && overlay) {
                 menuBtn.addEventListener("click", () => {
                     mobileMenu.classList.toggle('-translate-x-full');
                     mobileMenu.classList.toggle('-translate-x-0');
-
                     overlay.classList.toggle('hidden');
                 });
 
                 overlay.addEventListener("click", () => {
                     mobileMenu.classList.toggle('-translate-x-full');
                     mobileMenu.classList.toggle('-translate-x-0');
-
                     overlay.classList.toggle('hidden');
-                })
-            });
+                });
+            }
+
+        } catch (error) {
+            console.error("Include failed:", error);
+        }
     });
 });
