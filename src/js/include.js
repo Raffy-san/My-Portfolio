@@ -1,24 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
-    const rootPath = isLocal ? "" : "/My-Portfolio";
+    const rootPath = isLocal ? "" : "/My-Portfolio/public";
 
     document.querySelectorAll('a').forEach(a => {
         const href = a.getAttribute("href");
-
-        if (href?.startsWith("public/")) {
-            // If local, don't add extra "/public"
-            const newHref = isLocal
-                ? `/${href}` // --> /public/projects.html ✅
-                : `${rootPath}/${href}`; // --> /My-Portfolio/public/projects.html ✅
-
-            a.setAttribute("href", newHref);
+        if (href && !href.startsWith("http") && !href.startsWith("#") && !href.startsWith("mailto:")) {
+            // Normalize to avoid double "public/"
+            a.setAttribute("href", rootPath + "/" + href.replace(/^\/+|^public\//, ""));
         }
     });
 
-    // Include HTML fragments (like headers/footers)
     document.querySelectorAll('[data-include]').forEach(async element => {
         const file = element.getAttribute('data-include');
-        const url = `${rootPath}/${file.replace(/^\/+/, "")}`;
+        const url = rootPath + "/" + file.replace(/^\/+|^public\//, "");
 
         try {
             const response = await fetch(url);
@@ -26,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.text();
             element.innerHTML = data;
 
-            // Menu toggle reattach
+            // Reattach menu event listeners inside header
             const menuBtn = document.getElementById('menuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('overlay');
