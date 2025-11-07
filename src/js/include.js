@@ -2,19 +2,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
     const rootPath = isLocal ? "" : "/My-Portfolio";
 
-    // Fix hrefs that start with "public/"
+    // ✅ Fix href links starting with "public/"
     document.querySelectorAll('a').forEach(a => {
         const href = a.getAttribute("href");
         if (href?.startsWith("public/")) {
-            // Use absolute path relative to the repo root
-            a.setAttribute("href", rootPath + "/" + href.replace(/^\/?public\//, "public/"));
+            // Build a clean path like /My-Portfolio/public/index.html (no double public)
+            a.setAttribute("href", `${rootPath}/${href}`);
         }
     });
 
-    // Handle HTML includes
+    // ✅ Handle HTML includes like headers/footers
     document.querySelectorAll('[data-include]').forEach(async element => {
         const file = element.getAttribute('data-include');
-        const url = rootPath + "/" + file.replace(/^\/+/, "");
+        const url = `${rootPath}/${file.replace(/^\/+/, "")}`;
 
         try {
             const response = await fetch(url);
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.text();
             element.innerHTML = data;
 
-            // Reattach menu listeners inside the included header
+            // ✅ Reattach menu event listeners after include
             const menuBtn = document.getElementById('menuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('overlay');
