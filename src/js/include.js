@@ -1,18 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
-    const rootPath = isLocal ? "" : "/My-Portfolio";
+    // Detect if running locally or on GitHub Pages
+    const isLocal = ["127.0.0.1", "localhost"].includes(window.location.hostname);
 
+    // Base root for HTML pages (where /public/ actually exists)
+    const rootPath = isLocal ? "/public" : "/My-Portfolio/public";
+
+    // --- Fix all internal links so they always start from the correct root ---
     document.querySelectorAll('a').forEach(a => {
         const href = a.getAttribute("href");
-        if (href && !href.startsWith("http") && !href.startsWith("#") && !href.startsWith("mailto:")) {
-            // Normalize to avoid double "public/"
-            a.setAttribute("href", rootPath + "/" + href.replace(/^\/+|^public\//, ""));
-        }
+        if (!href) return;
+
+        // Skip external, hash, and mail links
+        if (href.startsWith("http") || href.startsWith("#") || href.startsWith("mailto:")) return;
+
+        // ✅ Force absolute path from rootPath (not relative to current folder)
+        a.setAttribute("href", rootPath + "/" + href.replace(/^\/+/, ""));
     });
 
+    // --- Include reusable components (like header/footer) ---
     document.querySelectorAll('[data-include]').forEach(async element => {
         const file = element.getAttribute('data-include');
-        const url = rootPath + "/" + file.replace(/^\/+|^public\//, "");
+        const url = (isLocal ? "" : "/My-Portfolio") + "/" + file.replace(/^\/+/, "");
 
         try {
             const response = await fetch(url);
@@ -20,25 +28,20 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.text();
             element.innerHTML = data;
 
-            // Reattach menu event listeners inside header
+            // Reattach menu events (after include)
             const menuBtn = document.getElementById('menuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('overlay');
 
             if (menuBtn && mobileMenu && overlay) {
-                menuBtn.addEventListener("click", () => {
+                const toggleMenu = () => {
                     mobileMenu.classList.toggle('-translate-x-full');
                     mobileMenu.classList.toggle('-translate-x-0');
                     overlay.classList.toggle('hidden');
-                });
-
-                overlay.addEventListener("click", () => {
-                    mobileMenu.classList.toggle('-translate-x-full');
-                    mobileMenu.classList.toggle('-translate-x-0');
-                    overlay.classList.toggle('hidden');
-                });
+                };
+                menuBtn.addEventListener("click", toggleMenu);
+                overlay.addEventListener("click", toggleMenu);
             }
-
         } catch (error) {
             console.error("Include failed:", error);
         }
