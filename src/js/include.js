@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
     const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
-
     const rootPath = isLocal ? "" : "/My-Portfolio";
 
+    // Fix hrefs that start with "public/"
     document.querySelectorAll('a').forEach(a => {
         const href = a.getAttribute("href");
         if (href?.startsWith("public/")) {
-            a.setAttribute("href", rootPath + "/" + href);
+            // Use absolute path relative to the repo root
+            a.setAttribute("href", rootPath + "/" + href.replace(/^\/?public\//, "public/"));
         }
     });
 
+    // Handle HTML includes
     document.querySelectorAll('[data-include]').forEach(async element => {
         const file = element.getAttribute('data-include');
         const url = rootPath + "/" + file.replace(/^\/+/, "");
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.text();
             element.innerHTML = data;
 
-            // Reattach menu event listeners inside header
+            // Reattach menu listeners inside the included header
             const menuBtn = document.getElementById('menuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('overlay');
